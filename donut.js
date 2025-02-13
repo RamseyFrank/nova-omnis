@@ -1,39 +1,39 @@
-const preTag = document.getElementById("donut");
+let donut = document.getElementById("donut");
 
-let A = 0, B = 0;
-const interval = 30; // Speed of animation
+// Variables for rotation
+let rotationX = 0;
+let rotationY = 0;
+let velocityX = 0;
+let velocityY = 0;
+const damping = 0.95; // Decay factor for momentum
+const rotationSpeed = 0.2; // Speed of rotation when moving the mouse
 
-function renderDonut() {
-    let b = new Array(5600).fill(" "); // Increase buffer size for larger output
-    let z = new Array(5600).fill(0); // Increase depth buffer size
-    let cosA = Math.cos(A), sinA = Math.sin(A);
-    let cosB = Math.cos(B), sinB = Math.sin(B);
+// Track mouse movement
+document.addEventListener("mousemove", function(event) {
+    const mouseX = event.clientX;
+    const mouseY = event.clientY;
 
-    const width = 120, height = 40; // Increased size for a 70% screen fill
+    // Calculate new velocity based on mouse position
+    velocityX = ((mouseY / window.innerHeight) * 2 - 1) * rotationSpeed;
+    velocityY = ((mouseX / window.innerWidth) * 2 - 1) * rotationSpeed;
+});
 
-    for (let j = 0; j < 6.28; j += 0.06) { // Adjusted step size for smoother rendering
-        let cosJ = Math.cos(j), sinJ = Math.sin(j);
-        for (let i = 0; i < 6.28; i += 0.02) {
-            let cosI = Math.cos(i), sinI = Math.sin(i);
-            let h = cosJ + 2;
-            let D = 1 / (sinI * h * sinA + sinJ * cosA + 5);
-            let t = sinI * h * cosA - sinJ * sinA;
+// Momentum-based rotation update
+function update() {
+    // Apply velocity
+    rotationX += velocityX;
+    rotationY += velocityY;
 
-            let x = Math.floor(width / 2 + width * 0.35 * D * (cosI * h * cosB - t * sinB));
-            let y = Math.floor(height / 2 + height * 0.9 * D * (cosI * h * sinB + t * cosB));
-            let o = x + width * y;
-            let N = Math.floor(8 * ((sinJ * sinA - sinI * cosJ * cosA) * cosB - sinI * cosJ * sinA - sinJ * cosA - cosI * cosJ * sinB));
+    // Apply damping for smooth stopping effect
+    velocityX *= damping;
+    velocityY *= damping;
 
-            if (5600 > o && o > 0 && D > z[o]) {
-                z[o] = D;
-                b[o] = "%@#*+=-:. "[N > 0 ? N : 0]; // Keep high-contrast ASCII symbols
-            }
-        }
-    }
-    
-    preTag.innerHTML = `<span style="color: orange;">${b.join("").replace(/(.{120})/g, "$1\n")}</span>`;
-    A += 0.04;
-    B += 0.08;
+    // Apply rotation to donut
+    donut.style.transform = `rotateX(${rotationX}deg) rotateY(${rotationY}deg)`;
+
+    // Request next frame for animation
+    requestAnimationFrame(update);
 }
 
-setInterval(renderDonut, interval);
+// Start animation loop
+update();
