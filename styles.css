@@ -1,0 +1,19 @@
+/* Set the background color and text color */
+body {
+    background-color: black;
+    color: white;
+    font-family: 'Papyrus', sans-serif; /* Apply Papyrus font */
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Ensure it covers the entire height of the screen */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Style for the title */
+h1 {
+    color: teal; /* Set text color to teal */
+    font-weight: bold; /* Make the text bold */
+    font-size: 4em; /* Make the title large */
+}
