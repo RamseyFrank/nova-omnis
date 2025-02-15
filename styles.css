@@ -11,14 +11,16 @@
 body {
     background-color: black;
     color: white;
+    font-family: 'Flynn', sans-serif; /* Use Flynn font */
     margin: 0;
     padding: 0;
-    height: 100vh; /* Full screen height */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+    height: 100vh;
+    display: flex; /* Enables flexbox */
+    justify-content: center; /* Centers content horizontally */
+    align-items: center; /* Centers content vertically */
+    flex-direction: column; /* Stacks content vertically (title on top, button below) */
 }
+
 
 /* Style for the title */
 h1 {
@@ -41,4 +43,26 @@ h1 {
     -webkit-background-clip: text;
     background-clip: text;
     animation: shimmer 2s infinite linear;
+}
+
+.flynn-button:hover {
+    background-color: teal; /* Add a hover effect */
+    color: black;
+}
+
+
+.flynn-button {
+    font-size: 5em; /* Make the "O" large */
+    font-weight: bold;
+    color: white;
+    background-color: transparent;
+    border: 2px solid teal;
+    padding: 20px 40px;
+    margin-top: 20px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 50%; /* Make it a circle */
+    font-family: 'Flynn Hollow', sans-serif; /* Use Flynn Hollow font */
 }
