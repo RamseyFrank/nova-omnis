@@ -1,18 +1,28 @@
-/* Set the background color and text color */
+/* Import the Flynn Hollow font */
+@font-face {
+    font-family: 'Flynn Hollow';
+    src: url('fonts/FlynnHollow.woff2') format('woff2'),
+         url('fonts/FlynnHollow.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Set the background color and center content */
 body {
     background-color: black;
     color: white;
-    font-family: 'Papyrus', sans-serif; /* Apply Papyrus font */
     margin: 0;
     padding: 0;
-    height: 100vh; /* Ensure it covers the entire height of the screen */
+    height: 100vh; /* Full screen height */
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
 /* Style for the title */
 h1 {
+    font-family: 'Flynn Hollow', sans-serif; /* Use Flynn Hollow font */
     color: teal; /* Set text color to teal */
     font-weight: bold; /* Make the text bold */
     font-size: 4em; /* Make the title large */
