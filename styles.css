@@ -59,6 +59,7 @@ h1 {
     border: 2px solid teal;
     padding: 20px 40px;
     margin-top: 20px;
+    margin: 20px auto; /* Centers the button */
     cursor: pointer;
     text-align: center;
     text-decoration: none;
