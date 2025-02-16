@@ -28,10 +28,14 @@
             touch-action: none; /* Prevent scrolling while dragging */
         }
         h1 {
-            position: relative;
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
             color: white;
-            z-index: 10;
             font-size: clamp(2rem, 5vw, 4rem);
+            text-align: center;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -46,7 +50,7 @@
         document.body.appendChild(renderer.domElement);
 
         // Rounded Cube (Beveled Edges)
-        const geometry = new THREE.BoxGeometry(3, 3, 3, 10, 10, 10); // Higher segments for smooth rounding
+        const geometry = new THREE.RoundedBoxGeometry(3, 3, 3, 10, 10, 10); // Higher segments for smooth rounding
         const material = new THREE.MeshPhysicalMaterial({
             color: "white",
             metalness: 0.8,
