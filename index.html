@@ -4,25 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nova Omnis</title>
-    
-    <link rel="stylesheet" href="styles.css">
 
-    <!-- Favicon -->
+    <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
     <link rel="apple-touch-icon" href="favicon_io/apple-touch-icon.png">
 
-    <!-- Three.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Three.js Module -->
     <script type="module">
-        import { RoundedBoxGeometry } from 'https://cdn.jsdelivr.net/npm/three/examples/jsm/geometries/RoundedBoxGeometry.js';
+        import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.136.0/build/three.module.js';
+        import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.136.0/examples/jsm/controls/OrbitControls.js';
+        import { RoundedBoxGeometry } from 'https://cdn.jsdelivr.net/npm/three@0.136.0/examples/jsm/geometries/RoundedBoxGeometry.js';
 
+        // Scene, Camera, Renderer
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(renderer.domElement);
 
-        // ✅ Rounded Cube Geometry
+        // ✅ Rounded Cube
         const geometry = new RoundedBoxGeometry(3, 3, 3, 10, 0.5);  // Last value = roundness
         const material = new THREE.MeshPhysicalMaterial({
             color: "white",
@@ -44,8 +44,8 @@
 
         camera.position.z = 7;
 
-        // ✅ Enable Rotation (Mobile-Friendly)
-        const controls = new window.THREE.OrbitControls(camera, renderer.domElement);
+        // ✅ Enable Rotation (Desktop & Mobile)
+        const controls = new OrbitControls(camera, renderer.domElement);
         controls.enableDamping = true;
         controls.dampingFactor = 0.05;
         controls.rotateSpeed = 0.7;
@@ -59,11 +59,13 @@
         }
         animate();
 
+        // ✅ Make Cube Responsive
         window.addEventListener('resize', () => {
             renderer.setSize(window.innerWidth, window.innerHeight);
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
         });
+
     </script>
 
     <style>
@@ -80,7 +82,6 @@
             height: 100vh;
             background-color: black;
             overflow: hidden;
-            touch-action: none; /* Prevents scrolling while dragging */
         }
 
         h1 {
